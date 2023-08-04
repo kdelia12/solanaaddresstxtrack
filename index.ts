@@ -6,8 +6,8 @@ import { Client, TextChannel } from 'discord.js'
 // Replace these values with your actual environment variables
 const TOKEN = process.env.DISCORD_TOKEN;
 const CHANNEL_ID = '1131549535525683230';
-const WSS_ENDPOINT = 'wss://special-indulgent-glitter.solana-mainnet.discover.quiknode.pro/69bd625c3fae8d09c87a2a78b8ff325b76806837/';
-const HTTP_ENDPOINT = 'https://special-indulgent-glitter.solana-mainnet.discover.quiknode.pro/69bd625c3fae8d09c87a2a78b8ff325b76806837/';
+const WSS_ENDPOINT = 'wss://rpc.ankr.com/solana/ws/ec5d708928c04ed05d30dcc3f5d3227a68fd5b3bdb7c3471034c646416f7d519';
+const HTTP_ENDPOINT = 'https://rpc.ankr.com/solana/ec5d708928c04ed05d30dcc3f5d3227a68fd5b3bdb7c3471034c646416f7d519';
 const SOL_ADDRESS = process.env.SOL_ADDRESS;
 const USDT_ADDRESS = process.env.USDT_ACCOUNT;
 const USDC_ADDRESS = process.env.USDC_ACCOUNT;
