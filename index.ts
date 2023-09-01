@@ -1,13 +1,14 @@
 const { Connection, PublicKey } = require("@solana/web3.js");
 import dotenv from "dotenv";
 dotenv.config(); // Load environment variables from .env file
-import { Client, TextChannel } from 'discord.js'
+import { Client, Embed, TextChannel } from 'discord.js'
+const { EmbedBuilder } = require('discord.js');
 
 // Replace these values with your actual environment variables
 const TOKEN = process.env.DISCORD_TOKEN;
-const CHANNEL_ID = '1131549535525683230';
-const WSS_ENDPOINT = 'wss://rpc.ankr.com/solana/ws/ec5d708928c04ed05d30dcc3f5d3227a68fd5b3bdb7c3471034c646416f7d519';
-const HTTP_ENDPOINT = 'https://rpc.ankr.com/solana/ec5d708928c04ed05d30dcc3f5d3227a68fd5b3bdb7c3471034c646416f7d519';
+const CHANNEL_ID = '1094952425158348830';
+const WSS_ENDPOINT = 'wss://greatest-sleek-shadow.solana-devnet.discover.quiknode.pro/96a6161bf239587d97e626fa9a001cd14fa858fd/';
+const HTTP_ENDPOINT = 'https://greatest-sleek-shadow.solana-devnet.discover.quiknode.pro/96a6161bf239587d97e626fa9a001cd14fa858fd/';
 const SOL_ADDRESS = process.env.SOL_ADDRESS;
 const USDT_ADDRESS = process.env.USDT_ACCOUNT;
 const USDC_ADDRESS = process.env.USDC_ACCOUNT;
@@ -83,7 +84,7 @@ const fetchAndParseTransactionsol = async (txSignature: string) => {
 
   try {
     console.log(txSignature);
-    await sleep(15000);
+    await sleep(20000);
     const parsedTransaction = await solana.getTransaction(txSignature);
     sender = parsedTransaction.transaction.message.accountKeys[0];
     receiver = parsedTransaction.transaction.message.accountKeys[1];
@@ -107,16 +108,34 @@ const fetchAndParseTransactionsol = async (txSignature: string) => {
   }
 
   let final = "";
+  let sendreceive = "";
+  let jumlahs = "";
+  let address = "";
+  let link="";
   console.log(issending);
   if (issending) {
-    final = "Mengirim " + jumlah + " SOL ke " + receiver + " tx link : " + solscanlink;
+    jumlahs = ""+jumlah+" SOL";
+    final = "Mengirim " + jumlah + " SOL ke " + receiver + "tx link : " + solscanlink;
+    sendreceive = "! ! SENDING ! !"
+    address = "**"+receiver+"**";
+    link = "[SolScan]("+solscanlink+")";
   } else {
-    console.log(sender);
-    console.log(issending);
-    console.log(SOL_ADDRESS);
-    final = "Menerima " + jumlah + " SOL dari " + sender + " tx link : " + solscanlink;
+    final = "Menerima " + jumlah + " SOL dari " + sender + "tx link : " + solscanlink;
+    sendreceive = "! ! RECEIVED ! !"
+    address = sender;
+    jumlahs = ""+jumlah+" SOL";
+    address = "**"+sender+"**";
+    link = "[SolScan]("+solscanlink+")";
   }
-  return final;
+  const embed = new EmbedBuilder()
+  .setColor(0x0099FF)
+  .setTitle(sendreceive)
+  .addFields(
+    {name: "Amount :", value: jumlahs},
+    {name: "From/To :", value: address},
+    {name: "Link :", value: link}
+  )
+  return embed;
 };
 
 const fetchAndParseTransactionusdt = async (txSignature: string) => {
@@ -132,7 +151,7 @@ const fetchAndParseTransactionusdt = async (txSignature: string) => {
 
   try {
     console.log(txSignature);
-    await sleep(15000);
+    await sleep(20000);
     const parsedTransaction = await solana.getTransaction(txSignature);
 
     sender = parsedTransaction.transaction.message.accountKeys[0];
@@ -155,15 +174,35 @@ const fetchAndParseTransactionusdt = async (txSignature: string) => {
   } catch (error) {
     console.error("Failed to fetch and parse the USDT transaction:", error);
   }
-
   let final = "";
+  let sendreceive = "";
+  let jumlahs = "";
+  let address = "";
+  let link="";
   console.log(issending);
   if (issending) {
+    jumlahs = ""+jumlah+" USDT";
     final = "Mengirim " + jumlah + " USDT ke " + receiver + "tx link : " + solscanlink;
+    sendreceive = "! ! SENDING ! !"
+    address = "**"+receiver+"**";
+    link = "[SolScan]("+solscanlink+")";
   } else {
     final = "Menerima " + jumlah + " USDT dari " + sender + "tx link : " + solscanlink;
+    sendreceive = "! ! RECEIVED ! !"
+    address = sender;
+    jumlahs = ""+jumlah+" USDT";
+    address = "**"+sender+"**";
+    link = "[SolScan]("+solscanlink+")";
   }
-  return final;
+  const embed = new EmbedBuilder()
+  .setColor(0x0099FF)
+  .setTitle(sendreceive)
+  .addFields(
+    {name: "Amount :", value: jumlahs},
+    {name: "From/To :", value: address},
+    {name: "Link :", value: link}
+  )
+  return embed;
 };
 
 const fetchAndParseTransactionusdc = async (txSignature: string) => {
@@ -179,7 +218,7 @@ const fetchAndParseTransactionusdc = async (txSignature: string) => {
 
   try {
     console.log(txSignature);
-    await sleep(15000);
+    await sleep(20000);
     const parsedTransaction = await solana.getTransaction(txSignature);
 
     sender = parsedTransaction.transaction.message.accountKeys[0];
@@ -203,20 +242,41 @@ const fetchAndParseTransactionusdc = async (txSignature: string) => {
   }
 
   let final = "";
+  let sendreceive = "";
+  let jumlahs = "";
+  let address = "";
+  let link="";
   console.log(issending);
   if (issending) {
-    final = "Mengirim " + jumlah + " USDC ke " + receiver + "tx link : " + solscanlink;
+    jumlahs = ""+jumlah+" USDT";
+    final = "Mengirim " + jumlah + " USDT ke " + receiver + "tx link : " + solscanlink;
+    sendreceive = "! ! SENDING ! !"
+    address = "**"+receiver+"**";
+    link = "[SolScan]("+solscanlink+")";
   } else {
-    final = "Menerima " + jumlah + " USDC dari " + sender + "tx link : " + solscanlink;
+    final = "Menerima " + jumlah + " USDT dari " + sender + "tx link : " + solscanlink;
+    sendreceive = "! ! RECEIVED ! !"
+    address = sender;
+    jumlahs = ""+jumlah+" USDT";
+    address = "**"+sender+"**";
+    link = "[SolScan]("+solscanlink+")";
   }
-  return final;
+  const embed = new EmbedBuilder()
+  .setColor(0x0099FF)
+  .setTitle(sendreceive)
+  .addFields(
+    {name: "Amount :", value: jumlahs},
+    {name: "From/To :", value: address},
+    {name: "Link :", value: link}
+  )
+  return embed;
 };
 
-const sendMessageToDiscordChannel = async (message: string) => {
+const sendMessageToDiscordChannel = async (message: Embed) => {
   try {
     await client.login(TOKEN);
     const channel = await client.channels.fetch(CHANNEL_ID) as TextChannel;
-    await channel.send(message);
+    await channel.send({ embeds: [message] });
   } catch (error) {
     console.error("Failed to send message to Discord channel:", error);
   }
