@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config(); // Load environment variables from .env file
 import { Client, Embed, TextChannel } from 'discord.js'
 const { EmbedBuilder } = require('discord.js');
-
+const BigNumber = require('bignumber.js');
 // Replace these values with your actual environment variables
 const TOKEN = process.env.DISCORD_TOKEN;
 const CHANNEL_ID = '1131549535525683230';
@@ -92,7 +92,7 @@ const fetchAndParseTransactionsol = async (txSignature: string) => {
 
     tokenaddress = parsedTransaction.transaction.message.accountKeys[4] || "11111111111111111111111111111111";
     if (tokenaddress === "11111111111111111111111111111111") {
-      jumlah = parseFloat((Math.abs(parsedTransaction.meta.postBalances[1] - parsedTransaction.meta.preBalances[1]) / 1000000000).toFixed(3));
+      jumlah = parseFloat(new BigNumber(parsedTransaction.meta.postTokenBalances[0].uiTokenAmount.amount).minus(parsedTransaction.meta.preTokenBalances[0].uiTokenAmount.amount).dividedBy(1000000000).toFixed(3));
     }
 
     console.log(tokenaddress);
@@ -167,7 +167,8 @@ const fetchAndParseTransactionusdt = async (txSignature: string) => {
 
     tokenaddress = parsedTransaction.transaction.message.accountKeys[4];
     if (tokenaddress === "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB") {
-      jumlah = parseFloat((Math.abs(parsedTransaction.meta.postTokenBalances[0].uiTokenAmount.amount - parsedTransaction.meta.preTokenBalances[0].uiTokenAmount.amount) / 1000000).toFixed(2));
+      jumlah = parseFloat(new BigNumber(parsedTransaction.meta.postTokenBalances[0].uiTokenAmount.amount).minus(parsedTransaction.meta.preTokenBalances[0].uiTokenAmount.amount).dividedBy(1000000).toFixed(3));
+      
     }
 
     console.log(tokenaddress);
@@ -237,7 +238,7 @@ const fetchAndParseTransactionusdc = async (txSignature: string) => {
     solscanlink = "https://solscan.io/tx/" + txSignature;
 
     tokenaddress = parsedTransaction.transaction.message.accountKeys[4];
-    jumlah = parseFloat((Math.abs(parsedTransaction.meta.postTokenBalances[0].uiTokenAmount.amount - parsedTransaction.meta.preTokenBalances[0].uiTokenAmount.amount) / 1000000).toFixed(2));
+    jumlah = parseFloat(new BigNumber(parsedTransaction.meta.postTokenBalances[0].uiTokenAmount.amount).minus(parsedTransaction.meta.preTokenBalances[0].uiTokenAmount.amount).dividedBy(1000000).toFixed(2));
 
     console.log(tokenaddress);
     console.log(sender);
@@ -260,14 +261,14 @@ const fetchAndParseTransactionusdc = async (txSignature: string) => {
   let click="";
   console.log(issending);
   if (issending) {
-    jumlahs = ""+jumlah+" USDC";
+    jumlahs = ""+jumlah+" USDT";
     final = "Mengirim " + jumlah + " USDT ke " + receiver + "tx link : " + solscanlink;
     sendreceive = "! ! SENDING ! !"
     address = "**"+receiver+"**";
     link = ""+solscanlink;
     click = "[Click Here]("+solscanlink+")";
   } else {
-    final = "Menerima " + jumlah + " USDT dari " + sender + "tx link : " + solscanlink;
+    final = "Menerima " + jumlah + " USDC dari " + sender + "tx link : " + solscanlink;
     sendreceive = "! ! RECEIVED ! !"
     address = sender;
     jumlahs = ""+jumlah+" USDC";
