@@ -192,13 +192,13 @@ const fetchAndParseTransactionusdt = async (txSignature: string) => {
   if (issending) {
     jumlahs = ""+jumlah+" USDT";
     final = "Mengirim " + jumlah + " USDT ke " + receiver + "tx link : " + solscanlink;
-    sendreceive = "! ! SENDING ! !"
+    sendreceive = "<a:owo:918748809725616168> ! ! SENDING ! ! <a:owo:918748809725616168>"
     address = "**"+receiver+"**";
     link = ""+solscanlink;
     click = "[Click Here]("+solscanlink+")";
   } else {
     final = "Menerima " + jumlah + " USDT dari " + sender + "tx link : " + solscanlink;
-    sendreceive = "! ! RECEIVED ! !"
+    sendreceive = "<a:pepe_rich:1087066383914905763> ! ! RECEIVED ! ! <a:pepe_rich:1087066383914905763>"
     address = sender;
     jumlahs = ""+jumlah+" USDT";
     address = "**"+sender+"**";
@@ -263,13 +263,13 @@ const fetchAndParseTransactionusdc = async (txSignature: string) => {
   if (issending) {
     jumlahs = ""+jumlah+" USDT";
     final = "Mengirim " + jumlah + " USDT ke " + receiver + "tx link : " + solscanlink;
-    sendreceive = "! ! SENDING ! !"
+    sendreceive = "<a:owo:918748809725616168> ! ! SENDING ! ! <a:owo:918748809725616168>"
     address = "**"+receiver+"**";
     link = ""+solscanlink;
     click = "[Click Here]("+solscanlink+")";
   } else {
     final = "Menerima " + jumlah + " USDC dari " + sender + "tx link : " + solscanlink;
-    sendreceive = "! ! RECEIVED ! !"
+    sendreceive = "<a:pepe_rich:1087066383914905763> ! ! RECEIVED ! ! <a:pepe_rich:1087066383914905763>"
     address = sender;
     jumlahs = ""+jumlah+" USDC";
     address = "**"+sender+"**";
