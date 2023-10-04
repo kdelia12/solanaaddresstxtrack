@@ -6,9 +6,9 @@ const { EmbedBuilder } = require('discord.js');
 
 // Replace these values with your actual environment variables
 const TOKEN = process.env.DISCORD_TOKEN;
-const CHANNEL_ID = '1094952425158348830';
-const WSS_ENDPOINT = 'wss://greatest-sleek-shadow.solana-devnet.discover.quiknode.pro/96a6161bf239587d97e626fa9a001cd14fa858fd/';
-const HTTP_ENDPOINT = 'https://greatest-sleek-shadow.solana-devnet.discover.quiknode.pro/96a6161bf239587d97e626fa9a001cd14fa858fd/';
+const CHANNEL_ID = '1131549535525683230';
+const WSS_ENDPOINT = 'wss://special-indulgent-glitter.solana-mainnet.discover.quiknode.pro/69bd625c3fae8d09c87a2a78b8ff325b76806837/';
+const HTTP_ENDPOINT = 'https://special-indulgent-glitter.solana-mainnet.discover.quiknode.pro/69bd625c3fae8d09c87a2a78b8ff325b76806837/';
 const SOL_ADDRESS = process.env.SOL_ADDRESS;
 const USDT_ADDRESS = process.env.USDT_ACCOUNT;
 const USDC_ADDRESS = process.env.USDC_ACCOUNT;
@@ -84,7 +84,7 @@ const fetchAndParseTransactionsol = async (txSignature: string) => {
 
   try {
     console.log(txSignature);
-    await sleep(20000);
+    await sleep(30000);
     const parsedTransaction = await solana.getTransaction(txSignature);
     sender = parsedTransaction.transaction.message.accountKeys[0];
     receiver = parsedTransaction.transaction.message.accountKeys[1];
@@ -92,7 +92,7 @@ const fetchAndParseTransactionsol = async (txSignature: string) => {
 
     tokenaddress = parsedTransaction.transaction.message.accountKeys[4] || "11111111111111111111111111111111";
     if (tokenaddress === "11111111111111111111111111111111") {
-      jumlah = parseFloat((Math.abs(parsedTransaction.meta.postBalances[0] - parsedTransaction.meta.preBalances[0]) / 1000000000).toFixed(2));
+      jumlah = parseFloat((Math.abs(parsedTransaction.meta.postBalances[1] - parsedTransaction.meta.preBalances[1]) / 1000000000).toFixed(3));
     }
 
     console.log(tokenaddress);
@@ -112,28 +112,35 @@ const fetchAndParseTransactionsol = async (txSignature: string) => {
   let jumlahs = "";
   let address = "";
   let link="";
+  let click="";
+  let color="";
   console.log(issending);
   if (issending) {
     jumlahs = ""+jumlah+" SOL";
     final = "Mengirim " + jumlah + " SOL ke " + receiver + "tx link : " + solscanlink;
-    sendreceive = "! ! SENDING ! !"
+    sendreceive = "<a:owo:918748809725616168> ! ! SENDING ! ! <a:owo:918748809725616168>"
     address = "**"+receiver+"**";
-    link = "[SolScan]("+solscanlink+")";
+    link = ""+solscanlink;
+    click = "[Click Here]("+solscanlink+")";
+    color = "#FF0000";
   } else {
     final = "Menerima " + jumlah + " SOL dari " + sender + "tx link : " + solscanlink;
-    sendreceive = "! ! RECEIVED ! !"
+    sendreceive = "<a:pepe_rich:1087066383914905763> ! ! RECEIVED ! ! <a:pepe_rich:1087066383914905763>"
     address = sender;
     jumlahs = ""+jumlah+" SOL";
     address = "**"+sender+"**";
-    link = "[SolScan]("+solscanlink+")";
+    link = ""+solscanlink;
+    click = "[Click Here]("+solscanlink+")";
+    color = "#87FF52"
   }
   const embed = new EmbedBuilder()
-  .setColor(0x0099FF)
+  .setColor(color)
   .setTitle(sendreceive)
   .addFields(
     {name: "Amount :", value: jumlahs},
     {name: "From/To :", value: address},
-    {name: "Link :", value: link}
+    {name: "Link :", value: link},
+    {name: "Directlink", value:click}
   )
   return embed;
 };
@@ -179,20 +186,23 @@ const fetchAndParseTransactionusdt = async (txSignature: string) => {
   let jumlahs = "";
   let address = "";
   let link="";
+  let click="";
   console.log(issending);
   if (issending) {
     jumlahs = ""+jumlah+" USDT";
     final = "Mengirim " + jumlah + " USDT ke " + receiver + "tx link : " + solscanlink;
     sendreceive = "! ! SENDING ! !"
     address = "**"+receiver+"**";
-    link = "[SolScan]("+solscanlink+")";
+    link = ""+solscanlink;
+    click = "[Click Here]("+solscanlink+")";
   } else {
     final = "Menerima " + jumlah + " USDT dari " + sender + "tx link : " + solscanlink;
     sendreceive = "! ! RECEIVED ! !"
     address = sender;
     jumlahs = ""+jumlah+" USDT";
     address = "**"+sender+"**";
-    link = "[SolScan]("+solscanlink+")";
+    link = ""+solscanlink;
+    click = "[Click Here]("+solscanlink+")";
   }
   const embed = new EmbedBuilder()
   .setColor(0x0099FF)
@@ -200,7 +210,8 @@ const fetchAndParseTransactionusdt = async (txSignature: string) => {
   .addFields(
     {name: "Amount :", value: jumlahs},
     {name: "From/To :", value: address},
-    {name: "Link :", value: link}
+    {name: "Link :", value: link},
+    {name: "Directlink", value: click} 
   )
   return embed;
 };
@@ -218,7 +229,7 @@ const fetchAndParseTransactionusdc = async (txSignature: string) => {
 
   try {
     console.log(txSignature);
-    await sleep(20000);
+    await sleep(30000);
     const parsedTransaction = await solana.getTransaction(txSignature);
 
     sender = parsedTransaction.transaction.message.accountKeys[0];
@@ -246,20 +257,23 @@ const fetchAndParseTransactionusdc = async (txSignature: string) => {
   let jumlahs = "";
   let address = "";
   let link="";
+  let click="";
   console.log(issending);
   if (issending) {
-    jumlahs = ""+jumlah+" USDT";
+    jumlahs = ""+jumlah+" USDC";
     final = "Mengirim " + jumlah + " USDT ke " + receiver + "tx link : " + solscanlink;
     sendreceive = "! ! SENDING ! !"
     address = "**"+receiver+"**";
-    link = "[SolScan]("+solscanlink+")";
+    link = ""+solscanlink;
+    click = "[Click Here]("+solscanlink+")";
   } else {
     final = "Menerima " + jumlah + " USDT dari " + sender + "tx link : " + solscanlink;
     sendreceive = "! ! RECEIVED ! !"
     address = sender;
-    jumlahs = ""+jumlah+" USDT";
+    jumlahs = ""+jumlah+" USDC";
     address = "**"+sender+"**";
-    link = "[SolScan]("+solscanlink+")";
+    link = ""+solscanlink;
+    click = "[Click Here]("+solscanlink+")";
   }
   const embed = new EmbedBuilder()
   .setColor(0x0099FF)
@@ -267,7 +281,8 @@ const fetchAndParseTransactionusdc = async (txSignature: string) => {
   .addFields(
     {name: "Amount :", value: jumlahs},
     {name: "From/To :", value: address},
-    {name: "Link :", value: link}
+    {name: "Link :", value: link},
+    {name: "Directlink", value: click},
   )
   return embed;
 };
