@@ -92,7 +92,7 @@ const fetchAndParseTransactionsol = async (txSignature: string) => {
 
     tokenaddress = parsedTransaction.transaction.message.accountKeys[4] || "11111111111111111111111111111111";
     if (tokenaddress === "11111111111111111111111111111111") {
-      jumlah = parseFloat(new BigNumber(parsedTransaction.meta.postTokenBalances[0].uiTokenAmount.amount).minus(parsedTransaction.meta.preTokenBalances[0].uiTokenAmount.amount).dividedBy(1).toFixed(3));
+      jumlah = parseFloat((Math.abs(parsedTransaction.meta.postTokenBalances[0].uiTokenAmount.amount - parsedTransaction.meta.preTokenBalances[0].uiTokenAmount.amount) / 1000000).toFixed(2));
     }
 
     console.log(tokenaddress);
