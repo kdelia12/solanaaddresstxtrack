@@ -94,6 +94,7 @@ const fetchAndParseTransactionsol = async (txSignature: string) => {
     if (tokenaddress === "11111111111111111111111111111111") {
       jumlah = parseFloat(new BigNumber(parseFloat(parsedTransaction.meta.postTokenBalances[1])).minus(parseFloat(parsedTransaction.meta.preTokenBalances[1])).dividedBy(1000000000).toFixed(3));
     }
+    console.log(parsedTransaction.meta.postTokenBalances[1])
 
     console.log(tokenaddress);
     if (sender == SOL_ADDRESS) {
